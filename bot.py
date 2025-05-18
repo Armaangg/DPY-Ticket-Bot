@@ -43,8 +43,7 @@ class Bot(commands.Bot):
         # The staff role to add to tickets
         self.staff_role_id = None
         # The data storage medium to use (MUST implement utils.db.base.Base)
-        # self.ticket_db = JsonStore(storage_path="/bot_config/")
-        self.ticket_db = SqliteStore(storage_path="/bot_config/")
+        self.ticket_db = JsonStore(storage_path="/bot_config/")
 
         if not self.category_id \
                 or not self.log_channel_id \
@@ -114,11 +113,6 @@ if __name__ == "__main__":
     bot = Bot()
 
 
-    @bot.command(name="new", description="Create a new ticket.", usage="[subject]")
-    @commands.guild_only()
-    async def new(ctx, *, subject=None):
-        log.info("Trying to create a new ticket via command.")
-        await ctx.ticket.create_ticket(subject=subject)
 
 
     @bot.command(
